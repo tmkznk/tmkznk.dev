@@ -1,0 +1,108 @@
+---
+const navItems = [
+	{ label: "Home", href: "/" },
+	{ label: "About", href: "#about" },
+	{ label: "Work", href: "#work" },
+	{ label: "Contact", href: "#contact" },
+];
+---
+
+<header class="relative z-20">
+	<nav class="container-page flex items-center justify-between py-6" aria-label="Primary">
+		<a
+			href="/"
+			class="text-xl font-bold tracking-tight"
+			aria-label="tmkznk.dev — home"
+		>
+			tmkznk<span class="text-accent">.dev</span>
+		</a>
+
+		<!-- Desktop navigation -->
+		<ul class="hidden items-center gap-8 md:flex">
+			{
+				navItems.map((item) => (
+					<li>
+						<a
+							href={item.href}
+							class="text-small font-medium text-ink-secondary transition-colors hover:text-ink"
+						>
+							{item.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+
+		<!-- Mobile menu toggle -->
+		<button
+			type="button"
+			id="menu-toggle"
+			class="btn-secondary flex h-11 w-11 items-center justify-center !p-0 md:hidden"
+			aria-label="Open menu"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+		>
+			<svg
+				class="h-5 w-5"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				aria-hidden="true"
+			>
+				<line x1="4" y1="6" x2="20" y2="6"></line>
+				<line x1="4" y1="12" x2="20" y2="12"></line>
+				<line x1="4" y1="18" x2="20" y2="18"></line>
+			</svg>
+		</button>
+	</nav>
+
+	<!-- Mobile menu panel -->
+	<div
+		id="mobile-menu"
+		class="container-page hidden pb-4 md:hidden"
+		hidden
+	>
+		<ul class="flex flex-col gap-1 rounded-card border border-border bg-surface p-2">
+			{
+				navItems.map((item) => (
+					<li>
+						<a
+							href={item.href}
+							class="block rounded-xl px-4 py-3 text-body font-medium text-ink-secondary transition-colors hover:bg-surface-hover hover:text-ink"
+						>
+							{item.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</header>
+
+<script>
+	const toggle = document.getElementById("menu-toggle");
+	const menu = document.getElementById("mobile-menu");
+
+	function setOpen(open: boolean) {
+		if (!toggle || !menu) return;
+		toggle.setAttribute("aria-expanded", String(open));
+		toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+		menu.hidden = !open;
+		menu.classList.toggle("hidden", !open);
+	}
+
+	toggle?.addEventListener("click", () => {
+		const open = toggle.getAttribute("aria-expanded") === "true";
+		setOpen(!open);
+	});
+
+	// Close on navigation or Escape
+	menu?.addEventListener("click", (e) => {
+		if ((e.target as HTMLElement).closest("a")) setOpen(false);
+	});
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") setOpen(false);
+	});
+</script>

@@ -1,0 +1,43 @@
+---
+/**
+ * Tech logos as inline SVG files (src/assets/tech/*.svg).
+ * Imported with ?raw and inlined so they inherit `currentColor`
+ * (monochrome white per the design system). Swap the files in
+ * src/assets/tech/ — keep the same names — to use your own logos.
+ */
+import reactSvg from "../assets/logotypes/react.svg?raw";
+import typescriptSvg from "../assets/logotypes/typescript.svg?raw";
+import nextSvg from "../assets/logotypes/nextjs2.svg?raw";
+import astroSvg from "../assets/logotypes/astro.svg?raw";
+import tailwindSvg from "../assets/logotypes/tailwindcss.svg?raw";
+
+const techs = [
+	{ name: "React", svg: reactSvg },
+	{ name: "TypeScript", svg: typescriptSvg },
+	{ name: "Next.js", svg: nextSvg },
+	{ name: "Astro", svg: astroSvg },
+	{ name: "Tailwind CSS", svg: tailwindSvg },
+];
+---
+
+<section class="container-page" aria-labelledby="tech-heading">
+	<h2 id="tech-heading" class="eyebrow">Technologies</h2>
+
+	<ul
+		class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-6 text-ink justify-between"
+		role="list"
+	>
+		{
+			techs.map((tech) => (
+				<li title={tech.name}>
+					<span
+						class="inline-flex h-8 items-center justify-center [&>svg]:h-full [&>svg]:w-full"
+						aria-hidden="true"
+						set:html={tech.svg}
+					/>
+					<span class="sr-only">{tech.name}</span>
+				</li>
+			))
+		}
+	</ul>
+</section>

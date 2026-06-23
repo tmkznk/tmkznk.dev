@@ -22,8 +22,8 @@
   --color-surface-hover: #111827;
 
   /* Accent — vivid green */
-  --color-accent: #16a34a;
-  --color-accent-hover: #22c55e;
+  --color-accent: #22c55e;
+  --color-accent-hover: #16a34a;
   --color-accent-glow: rgba(34, 197, 94, 0.25);
 
   /* Text */
@@ -70,8 +70,8 @@
   --text-card-title--font-weight: 600;
 
   /* Body */
-  --text-body: 1.125rem; /* 18px */
-  --text-body--line-height: 1.7;
+  --text-body: 1rem; /* 16px */
+  --text-body--line-height: 1.6;
   --text-body--font-weight: 400;
 
   /* Small */
@@ -133,11 +133,31 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden; /* guard against decorative bleed causing h-scroll */
   }
 
   ::selection {
     background-color: var(--color-accent);
     color: var(--color-bg);
+  }
+
+  /* Keyboard focus — visible accent ring, never on mouse clicks */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -154,6 +174,23 @@
     color: var(--color-accent);
   }
 
+  /* --- Skip link — visible only on keyboard focus --- */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100%;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-btn);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
   /* --- Eyebrow label --- */
   .eyebrow {
     font-size: var(--text-eyebrow);
@@ -165,6 +202,7 @@
 
   /* --- Layout container --- */
   .container-page {
+    box-sizing: border-box;
     width: 100%;
     max-width: 72rem; /* 1152px */
     margin-inline: auto;
@@ -206,6 +244,19 @@
   }
   .btn-secondary:hover {
     border-color: var(--color-ink-secondary);
+  }
+
+  /* Full-width CTA on mobile — label left, icon pushed to the right edge.
+     Reverts to inline, content-sized on >= sm (per design ref docs/img1.png). */
+  .btn-block {
+    width: 100%;
+    justify-content: space-between;
+  }
+  @media (min-width: 40rem) {
+    .btn-block {
+      width: auto;
+      justify-content: center;
+    }
   }
 
   /* --- Cards --- */
