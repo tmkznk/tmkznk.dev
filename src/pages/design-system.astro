@@ -1,0 +1,162 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const colors = [
+	{ name: "bg", value: "#050816", token: "--color-bg", note: "Background" },
+	{ name: "surface", value: "#0B1120", token: "--color-surface", note: "Cards" },
+	{ name: "surface-hover", value: "#111827", token: "--color-surface-hover", note: "Hover" },
+	{ name: "accent", value: "#16A34A", token: "--color-accent", note: "Accent" },
+	{ name: "accent-hover", value: "#22C55E", token: "--color-accent-hover", note: "Accent hover" },
+	{ name: "ink", value: "#F8FAFC", token: "--color-ink", note: "Text primary" },
+	{ name: "ink-secondary", value: "#94A3B8", token: "--color-ink-secondary", note: "Text secondary" },
+	{ name: "ink-muted", value: "#64748B", token: "--color-ink-muted", note: "Text muted" },
+];
+
+const typeScale = [
+	{ cls: "text-hero md:text-hero-lg", label: "Hero", demo: "Build. Optimize.", spec: "52 / 80px · 700" },
+	{ cls: "text-section md:text-section-lg", label: "Section", demo: "Selected work", spec: "32 / 48px · 700" },
+	{ cls: "text-card-title", label: "Card title", demo: "Sport Analytics Platform", spec: "20px · 600" },
+	{ cls: "text-body text-ink-secondary", label: "Body", demo: "Senior Front-End Engineer with 10+ years of experience.", spec: "18px · 400" },
+	{ cls: "text-small text-ink-muted", label: "Small", demo: "© 2025 tmkznk.dev", spec: "14px" },
+];
+---
+
+<Layout title="Design System — tmkznk.dev">
+	<main class="container-page py-section flex flex-col gap-section">
+		<!-- Header -->
+		<header class="flex flex-col gap-4">
+			<p class="eyebrow">Design System v1.0</p>
+			<h1 class="text-hero md:text-hero-lg">
+				Build. Optimize. <span class="accent">explore.</span>
+			</h1>
+			<p class="text-body text-ink-secondary max-w-xl">
+				Topographic Engineering. All tokens defined in{" "}
+				<code class="text-ink">global.css</code> as Tailwind v4 <code class="text-ink">@theme</code>.
+			</p>
+		</header>
+
+		<!-- Colors -->
+		<section class="flex flex-col gap-8">
+			<h2 class="text-section">Colors</h2>
+			<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+				{
+					colors.map((c) => (
+						<div class="card flex flex-col gap-3">
+							<div
+								class="h-20 w-full rounded-xl border border-border"
+								style={`background-color:${c.value}`}
+							/>
+							<div class="flex flex-col gap-0.5">
+								<span class="text-card-title">{c.name}</span>
+								<span class="text-small text-ink-muted">{c.value}</span>
+								<span class="text-small text-ink-muted">{c.note}</span>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<!-- Typography -->
+		<section class="flex flex-col gap-8">
+			<h2 class="text-section">Typography</h2>
+			<div class="flex flex-col gap-6">
+				{
+					typeScale.map((t) => (
+						<div class="card flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+							<div class={t.cls}>{t.demo}</div>
+							<div class="flex shrink-0 flex-col text-right">
+								<span class="text-small text-ink-secondary">{t.label}</span>
+								<span class="text-small text-ink-muted">{t.spec}</span>
+							</div>
+						</div>
+					))
+				}
+				<div class="card flex items-center gap-4">
+					<p class="text-body text-ink-secondary">
+						Accent font (Newsreader Italic) — single words only:
+						<span class="accent">love.</span> <span class="accent">explore.</span>
+						<span class="accent">journey.</span>
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Buttons -->
+		<section class="flex flex-col gap-8">
+			<h2 class="text-section">Buttons</h2>
+			<div class="flex flex-wrap gap-4">
+				<button class="btn btn-primary">
+					See my work
+					<span aria-hidden="true">→</span>
+				</button>
+				<button class="btn btn-secondary">
+					Download CV
+					<span aria-hidden="true">↓</span>
+				</button>
+			</div>
+		</section>
+
+		<!-- Cards -->
+		<section class="flex flex-col gap-8">
+			<h2 class="text-section">Cards</h2>
+			<div class="grid gap-4 sm:grid-cols-3">
+				<article class="card card-hover flex flex-col gap-3">
+					<div class="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-accent">
+						◇
+					</div>
+					<h3 class="text-card-title">Build to Last</h3>
+					<p class="text-small text-ink-secondary">
+						I focus on long-term solutions, not quick workarounds.
+					</p>
+				</article>
+				<article class="card card-hover flex flex-col gap-3">
+					<div class="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-accent">
+						◎
+					</div>
+					<h3 class="text-card-title">User First</h3>
+					<p class="text-small text-ink-secondary">
+						Great products start with understanding real user needs.
+					</p>
+				</article>
+				<article class="card card-hover flex flex-col gap-3">
+					<div class="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-accent">
+						❮❯
+					</div>
+					<h3 class="text-card-title">Keep it Simple</h3>
+					<p class="text-small text-ink-secondary">
+						Clean code, clear architecture and small, focused steps.
+					</p>
+				</article>
+			</div>
+
+			<!-- Project card -->
+			<article class="card-project flex flex-col gap-4">
+				<p class="eyebrow">Selected work</p>
+				<h3 class="text-card-title">Sport Analytics Platform</h3>
+				<p class="text-small text-ink-secondary max-w-md">
+					Analytics platform for athletes and coaches. Real-time data,
+					performance insights and team management.
+				</p>
+				<div class="flex gap-2 text-small text-ink-muted">
+					<span>Next.js</span> · <span>TypeScript</span> · <span>Chart.js</span>
+				</div>
+			</article>
+		</section>
+
+		<!-- Shadows -->
+		<section class="flex flex-col gap-8">
+			<h2 class="text-section">Shadows</h2>
+			<div class="grid gap-4 sm:grid-cols-2">
+				<div class="card flex flex-col items-center justify-center gap-2 py-10 shadow-hairline">
+					<span class="text-card-title">hairline</span>
+					<span class="text-small text-ink-muted">shadow-hairline</span>
+				</div>
+				<div class="card flex flex-col items-center justify-center gap-2 py-10 shadow-glow">
+					<span class="text-card-title text-accent">glow</span>
+					<span class="text-small text-ink-muted">shadow-glow · CTA only</span>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
