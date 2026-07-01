@@ -1,0 +1,30 @@
+---
+/**
+ * TopoTexture — seamless topographic contour pattern as a subtle, decorative
+ * background layer. Purely decorative → hidden from assistive tech.
+ */
+import patternUrl from "../assets/pattern.svg?url";
+
+interface Props {
+	/** Extra classes (e.g. z-index) for the wrapper. */
+	class?: string;
+	/** Layer opacity (0–1). */
+	opacity?: number;
+	/** Tile size in px — controls the pattern's on-screen scale. */
+	size?: number;
+}
+
+const { class: className = "", opacity = 0.12, size = 900 } = Astro.props;
+
+// Centered on the right edge and fading fully to transparent well before the
+// left, so the pattern is invisible on the left half.
+const maskFade =
+	"radial-gradient(50% 100% at 80% 50%, #000 22%, transparent 72%)";
+---
+
+<div
+	class:list={["pointer-events-none absolute inset-0 bg-repeat bg-right", className]}
+	style={`background-image:url('${patternUrl}');background-size:${size}px;opacity:${opacity};-webkit-mask-image:${maskFade};mask-image:${maskFade}`}
+	aria-hidden="true"
+>
+</div>

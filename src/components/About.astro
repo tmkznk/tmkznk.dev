@@ -1,0 +1,51 @@
+---
+/**
+ * About — open layout (no card), echoing the hero / Selected Work.
+ * Photo on the left, bio on the right.
+ */
+import { Image } from "astro:assets";
+import portrait from "../assets/tmkznk432.jpg";
+
+const portraitAlt =
+	"Tomasz Zienkowicz, Senior / Tech Lead Front-End Developer";
+---
+
+<section id="about" class="container-page" aria-labelledby="about-heading">
+	<h2 id="about-heading" class="eyebrow">About</h2>
+
+	<div class="mt-6 grid gap-8 md:grid-cols-[18rem_1fr] md:items-center md:gap-12">
+		<!-- Portrait -->
+		<figure class="relative w-full max-w-xs md:max-w-none">
+			<div
+				class="pointer-events-none absolute -inset-3 -z-10 rounded-full bg-accent/15 blur-3xl"
+				aria-hidden="true"
+			>
+			</div>
+			<Image
+				src={portrait}
+				alt={portraitAlt}
+				width={640}
+				height={853}
+				loading="lazy"
+				class="aspect-[3/4] w-full rounded-card border border-border object-cover shadow-glow"
+			/>
+		</figure>
+
+		<!-- Copy -->
+		<div class="flex max-w-2xl flex-col gap-4">
+			<h3 class="text-balance text-section">Building for the web since 2007.</h3>
+			<p class="text-pretty text-body text-ink-secondary">
+				Senior / Tech Lead Front-End Developer with over 10 years of experience
+				designing, building and maintaining scalable web and mobile applications.
+				React and TypeScript specialist, skilled in building modular frontend
+				architectures, integrating with REST APIs / GraphQL and working in a
+				monorepo (Nx).
+			</p>
+			<p class="text-pretty text-body text-ink-secondary">
+				Experienced in leading a team, running code reviews and caring about code
+				quality, performance and user experience. I actively use AI tools (Claude
+				Code, Cursor AI) in my day-to-day development, refactoring and code review.
+			</p>
+		</div>
+	</div>
+</section>
