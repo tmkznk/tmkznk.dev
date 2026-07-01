@@ -1,0 +1,68 @@
+---
+/**
+ * Selected Work — open layout (no card wrapper), echoing the hero.
+ * Content & two-column layout from img2.png. The right column is a real
+ * product screenshot: drop your file at public/work/sport-analytics.png
+ * (a placeholder ships until you replace it).
+ */
+const tags = ["Next.js", "TypeScript", "Chart.js"];
+const projectsHref = "/projects";
+---
+
+<section id="work" class="container-page" aria-labelledby="work-heading">
+	<h2 id="work-heading" class="eyebrow">Selected work</h2>
+
+	<div class="relative mt-6 grid items-center gap-10 md:grid-cols-2 md:gap-14">
+		<!-- Copy -->
+		<div class="flex flex-col gap-5">
+			<h3 class="text-balance text-section">Sport Analytics Platform</h3>
+			<p class="max-w-md text-pretty text-body text-ink-secondary">
+				Analytics platform for athletes and coaches. Real-time data,
+				performance insights and team management.
+			</p>
+
+			<ul class="flex flex-wrap gap-2" role="list">
+				{
+					tags.map((tag) => (
+						<li class="rounded-full border border-border bg-surface px-3 py-1.5 text-small text-ink-secondary">
+							{tag}
+						</li>
+					))
+				}
+			</ul>
+
+			<a
+				href={projectsHref}
+				class="group inline-flex w-fit items-center gap-2 text-small font-semibold text-accent transition-colors hover:text-accent-hover"
+			>
+				View all projects
+				<svg
+					class="h-4 w-4 transition-transform group-hover:translate-x-1"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M5 12h14"></path>
+					<path d="m12 5 7 7-7 7"></path>
+				</svg>
+			</a>
+		</div>
+
+		<!-- Product screenshot -->
+		<figure class="relative">
+			<img
+				src="/work/sport-analytics.png"
+				alt="Sport Analytics Platform dashboard: an upward-trending overview chart with sessions, users, new-users and bounce-rate metrics."
+				width="1200"
+				height="750"
+				loading="lazy"
+				decoding="async"
+				class="w-full rounded-card border border-border shadow-glow"
+			/>
+		</figure>
+	</div>
+</section>
