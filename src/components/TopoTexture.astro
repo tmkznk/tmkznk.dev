@@ -14,7 +14,7 @@ interface Props {
 	size?: number;
 }
 
-const { class: className = "", opacity = 0.12, size = 900 } = Astro.props;
+const { class: className = "", opacity = 0.15, size = 900 } = Astro.props;
 
 // Centered on the right edge and fading fully to transparent well before the
 // left, so the pattern is invisible on the left half.
@@ -23,7 +23,7 @@ const maskFade =
 ---
 
 <div
-	class:list={["pointer-events-none absolute inset-0 bg-repeat bg-right", className]}
+	class:list={["pointer-events-none absolute inset-0 bg-repeat bg-center md:bg-right", className]}
 	style={`background-image:url('${patternUrl}');background-size:${size}px;opacity:${opacity};-webkit-mask-image:${maskFade};mask-image:${maskFade}`}
 	aria-hidden="true"
 >

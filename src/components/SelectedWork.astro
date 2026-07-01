@@ -2,9 +2,11 @@
 /**
  * Selected Work — open layout (no card wrapper), echoing the hero.
  * Content & two-column layout from img2.png. The right column is a real
- * product screenshot: drop your file at public/work/sport-analytics.png
- * (a placeholder ships until you replace it).
+ * product screenshot imported from src/assets/work/.
  */
+import { Image } from "astro:assets";
+import sportAnalytics from "../assets/work/sport-analytics.png";
+
 const tags = ["Next.js", "TypeScript", "Chart.js"];
 const projectsHref = "/projects";
 ---
@@ -54,11 +56,9 @@ const projectsHref = "/projects";
 
 		<!-- Product screenshot -->
 		<figure class="relative">
-			<img
-				src="/work/sport-analytics.png"
+			<Image
+				src={sportAnalytics}
 				alt="Sport Analytics Platform dashboard: an upward-trending overview chart with sessions, users, new-users and bounce-rate metrics."
-				width="1200"
-				height="750"
 				loading="lazy"
 				decoding="async"
 				class="w-full rounded-card border border-border shadow-glow"

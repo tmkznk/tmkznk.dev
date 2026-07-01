@@ -1,6 +1,6 @@
 ---
 const navItems = [
-	{ label: "Home", href: "/" },
+	{ label: "Home", href: "/tmkznk.dev" },
 	{ label: "About", href: "#about" },
 	{ label: "Work", href: "#work" },
 	{ label: "Contact", href: "#contact" },
@@ -8,7 +8,7 @@ const navItems = [
 ---
 
 <header class="relative z-20">
-	<nav class="container-page flex items-center justify-between py-6" aria-label="Primary">
+	<nav class="container-page flex items-center justify-between py-4 md:py-6" aria-label="Primary">
 		<a
 			href="/"
 			class="text-xl font-bold tracking-tight"
@@ -37,7 +37,7 @@ const navItems = [
 		<button
 			type="button"
 			id="menu-toggle"
-			class="btn-secondary flex h-11 w-11 items-center justify-center !p-0 md:hidden"
+			class="btn-secondary flex h-11 w-11 items-center justify-center rounded-full !p-0 shadow-glow-menu md:hidden"
 			aria-label="Open menu"
 			aria-expanded="false"
 			aria-controls="mobile-menu"
