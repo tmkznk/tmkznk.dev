@@ -1,0 +1,51 @@
+---
+/**
+ * CTA banner — "Let's build something great."
+ * Uses the design-system project-card treatment (radial accent + hairline)
+ * with a subtle topographic texture echoing the brand motif.
+ * The "Let's talk" href is a placeholder — point it at your real inbox.
+ */
+import TopoTexture from "./TopoTexture.astro";
+
+const contactHref = "mailto:hello@tmkznk.dev";
+---
+
+<section id="contact" class="container-page" aria-labelledby="cta-heading">
+	<div
+		class="card-project relative flex flex-col gap-8 !p-8 md:flex-row md:items-center md:justify-between md:!p-12"
+	>
+		<!-- Topographic texture -->
+		<TopoTexture opacity={0.14} />
+
+		<!-- Copy -->
+		<div class="relative flex flex-col gap-4 md:max-w-md">
+			<h2
+				id="cta-heading"
+				class="text-balance text-section font-bold md:text-section-lg"
+			>
+				Let&rsquo;s build something great.
+			</h2>
+			<p class="text-pretty text-body text-ink-secondary">
+				Available for full-time roles and selected freelance projects.
+			</p>
+		</div>
+
+		<!-- Action -->
+		<a href={contactHref} class="btn btn-primary relative shrink-0 self-start md:self-auto">
+			Let&rsquo;s talk
+			<svg
+				class="h-5 w-5"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+			>
+				<path d="M5 12h14"></path>
+				<path d="m12 5 7 7-7 7"></path>
+			</svg>
+		</a>
+	</div>
+</section>
