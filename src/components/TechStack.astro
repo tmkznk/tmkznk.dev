@@ -7,7 +7,7 @@
  */
 import reactSvg from "../assets/logotypes/react.svg?raw";
 import typescriptSvg from "../assets/logotypes/typescript.svg?raw";
-import nextSvg from "../assets/logotypes/nextjs2.svg?raw";
+import nextSvg from "../assets/logotypes/nextjs.svg?raw";
 import astroSvg from "../assets/logotypes/astro.svg?raw";
 import tailwindSvg from "../assets/logotypes/tailwindcss.svg?raw";
 
@@ -31,7 +31,7 @@ const techs = [
 			techs.map((tech) => (
 				<li title={tech.name}>
 					<span
-						class="inline-flex h-8 items-center justify-center [&>svg]:h-full [&>svg]:w-full"
+						class="inline-flex h-10 items-center justify-center [&>svg]:h-full [&>svg]:w-full"
 						aria-hidden="true"
 						set:html={tech.svg}
 					/>
