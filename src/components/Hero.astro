@@ -1,9 +1,22 @@
 ---
 import TopoTexture from "./TopoTexture.astro";
+import RoutePath from "../assets/route-path.svg";
 ---
 
 <section class="relative overflow-hidden !pt-0" aria-labelledby="hero-heading">
-	<TopoTexture class="-z-10" opacity={0.15} />
+	<TopoTexture class="-z-20" opacity={0.15} />
+
+	<!-- Decorative route ending in a location marker (echoes the map motif) -->
+	<div
+		aria-hidden="true"
+		class="pointer-events-none absolute inset-0 -z-10"
+	>
+		<div class="container-page relative h-full">
+			<RoutePath
+				class="absolute right-[-16%] top-[50px] h-[58%] w-auto -scale-x-100 md:bottom-0 md:right-[20%] md:top-auto md:h-[80%] md:scale-x-100"
+			/>
+		</div>
+	</div>
 
 	<div class="container-page flex flex-col gap-8 pt-10 md:pt-16">
 		<!-- Eyebrow -->
@@ -33,13 +46,13 @@ import TopoTexture from "./TopoTexture.astro";
 		<!-- Heading -->
 		<h1
 			id="hero-heading"
-			class="max-w-3xl text-balance font-bold leading-[0.95] tracking-tight text-[clamp(2.25rem,9.5vw,3.25rem)] md:text-hero-lg"
+			class="max-w-[90%] text-balance font-bold leading-[0.95] tracking-tight text-[clamp(2.25rem,9.5vw,3.25rem)] md:max-w-3xl md:text-hero-lg"
 		>
 			I build<br />digital products<br />people <span class="accent">love.</span>
 		</h1>
 
 		<!-- Intro -->
-		<p class="text-body text-ink-secondary max-w-xl text-pretty">
+		<p class="text-body text-ink-secondary max-w-[90%] text-pretty md:max-w-xl">
 			Senior Front-End Engineer with 10+ years of experience building scalable
 			web applications with React, TypeScript, Next.js and Astro.
 		</p>
