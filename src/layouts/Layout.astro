@@ -10,11 +10,16 @@ interface Props {
 const {
 	title = "tmkznk.dev — Build. Optimize. Explore.",
 	description = "Senior Front-End Engineer with 10+ years of experience building scalable web applications with React, TypeScript, Next.js and Astro.",
-	image = "/og.png",
+	image = "og.png",
 } = Astro.props;
 
+// Resolve relative to the deployed base (e.g. /tmkznk.dev/) so the OG image
+// URL is correct on a GitHub Pages project site, not the apex domain.
+// BASE_URL has no trailing slash, so normalize it or new URL() drops it.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const siteBase = new URL(base, Astro.site ?? Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
-const ogImage = new URL(image, Astro.site ?? Astro.url);
+const ogImage = new URL(image, siteBase);
 ---
 
 <!doctype html>
@@ -23,8 +28,9 @@ const ogImage = new URL(image, Astro.site ?? Astro.url);
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+		<link rel="icon" href={`${base}favicon.ico`} sizes="any" />
+		<link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
 		<link rel="canonical" href={canonicalURL} />
 
 		<title>{title}</title>
