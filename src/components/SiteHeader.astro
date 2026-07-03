@@ -7,7 +7,10 @@ const navItems = [
 ];
 ---
 
-<header id="site-header" class="fixed inset-x-0 top-0 z-20">
+<header
+	id="site-header"
+	class="fixed inset-x-0 top-0 z-20 border-b border-transparent transition duration-300 [&.is-scrolled]:border-border [&.is-scrolled]:bg-[#050916bf] [&.is-scrolled]:backdrop-blur-[8px]"
+>
 	<nav class="container-page flex items-center justify-between py-3 md:py-6" aria-label="Primary">
 		<a
 			href="/"
@@ -85,23 +88,6 @@ const navItems = [
 </header>
 
 <style>
-	/* Glass navbar once the page is scrolled away from the top. Same blur as
-	   the mobile menu; translucent bg is required for the blur to show. */
-	#site-header {
-		transition:
-			background-color 300ms ease,
-			backdrop-filter 300ms ease,
-			border-color 300ms ease;
-		border-bottom: 1px solid transparent;
-	}
-
-	#site-header.is-scrolled {
-		background-color: rgba(5, 9, 22, 0.75); 
-		border-bottom-color: var(--color-border);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-	}
-
 	/* Animated overlay panel: fades + slides in, hidden from tab order when
 	   closed (visibility toggles focusability). */
 	.mobile-menu {
