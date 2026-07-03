@@ -1,11 +1,8 @@
 ---
-import TopoTexture from "./TopoTexture.astro";
 import RoutePath from "../assets/route-path.svg";
 ---
 
 <section class="relative overflow-hidden !pt-0" aria-labelledby="hero-heading">
-	<TopoTexture class="-z-20" opacity={0.15} />
-
 	<!-- Decorative route ending in a location marker (echoes the map motif) -->
 	<div
 		aria-hidden="true"
@@ -15,7 +12,7 @@ import RoutePath from "../assets/route-path.svg";
 			<!-- Mobile: positioned against the full section (stable on resize).
 			     Desktop (md+): the wrapper becomes `relative`, so it aligns to the container. -->
 			<RoutePath
-				class="absolute right-[-3.5rem] top-[36px] h-[58%] w-auto -scale-x-100 md:bottom-0 md:right-[20%] md:top-auto md:h-[80%] md:scale-x-100"
+				class="hidden lg:block absolute right-[-3.5rem] top-[36px] h-[58%] w-auto -scale-x-100 md:bottom-0 md:right-[20%] md:top-auto md:h-[80%] md:scale-x-100"
 			/>
 		</div>
 	</div>
@@ -33,14 +30,10 @@ import RoutePath from "../assets/route-path.svg";
 				stroke-linejoin="round"
 				aria-hidden="true"
 			>
-				<path d="M7 20h10"></path>
-				<path d="M10 20c5.5-2.5.8-6.4 3-10"></path>
-				<path
-					d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"
-				></path>
-				<path
-					d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"
-				></path>
+				<circle cx="12" cy="12" r="10"></circle>
+				<polygon
+					points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+				></polygon>
 			</svg>
 			<span class="eyebrow text-accent">Hello</span>
 		</p>

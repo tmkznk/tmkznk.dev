@@ -242,6 +242,8 @@
     background-color: transparent;
     color: var(--color-ink);
     border: 1px solid var(--color-border);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .btn-secondary:hover {
     border-color: var(--color-ink-secondary);

@@ -9,6 +9,7 @@ import MyPrinciples from "../components/MyPrinciples.astro";
 import About from "../components/About.astro";
 import CtaBanner from "../components/CtaBanner.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import TopoTexture from "../components/TopoTexture.astro";
 ---
 
 <Layout>
@@ -17,6 +18,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 		id="main-content"
 		class="flex flex-col gap-16 pb-section [&>section]:pt-6"
 	>
+		<TopoTexture fixed opacity={0.15} />
 		<Hero />
 		<TechStack />
 		<ExperienceHighlights />

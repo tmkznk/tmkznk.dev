@@ -10,21 +10,65 @@ interface Props {
 	class?: string;
 	/** Layer opacity (0–1). */
 	opacity?: number;
-	/** Tile size in px — controls the pattern's on-screen scale. */
+	/** Tile size in px on mobile — controls the pattern's on-screen scale. */
 	size?: number;
+	/** Tile size in px from the md breakpoint (768px) up. Defaults to `size`. */
+	sizeMd?: number;
+	/**
+	 * Pin to the viewport (page-wide backdrop) instead of the parent box.
+	 * Fixed → anchored in the top-right corner; otherwise centered on the
+	 * right edge of the parent.
+	 */
+	fixed?: boolean;
 }
 
-const { class: className = "", opacity = 0.15, size = 900 } = Astro.props;
+const {
+	class: className = "",
+	opacity = 0.15,
+	size = 500,
+	sizeMd = 900,
+	fixed = false,
+} = Astro.props;
 
-// Centered on the right edge and fading fully to transparent well before the
-// left, so the pattern is invisible on the left half.
-const maskFade =
-	"radial-gradient(50% 100% at 80% 50%, #000 22%, transparent 72%)";
+// Fixed: fade out from the top-right corner so the texture only tints that
+// corner of the viewport. Default: centered on the right edge and fully
+// transparent before the left half.
+const maskFade = fixed
+	? "radial-gradient(50% 75% at 75% 50%, #000 25%, transparent 75%)"
+	: "radial-gradient(50% 100% at 80% 50%, #000 22%, transparent 72%)";
+
+const positionClass = fixed
+	? "absolute inset-0 bg-right"
+	: "absolute inset-0 bg-center md:bg-right";
 ---
 
 <div
-	class:list={["pointer-events-none absolute inset-0 bg-repeat bg-center md:bg-right", className]}
-	style={`background-image:url('${patternUrl}');background-size:${size}px;opacity:${opacity};-webkit-mask-image:${maskFade};mask-image:${maskFade}`}
+	class:list={["topo-layer pointer-events-none", positionClass, className]}
+	style={`background-image:url('${patternUrl}');--topo-size:${size}px;--topo-size-md:${sizeMd}px;opacity:${opacity};-webkit-mask-image:${maskFade};mask-image:${maskFade}`}
 	aria-hidden="true"
 >
 </div>
+
+<style>
+	/* background-size can't live in a media query via inline style, so drive it
+	   from CSS vars set on the element. */
+	.topo-layer {
+		background-size: var(--topo-size);
+	}
+	@media (min-width: 768px) {
+		.topo-layer {
+			background-size: var(--topo-size-md);
+		}
+	}
+</style>
+
+<!-- {
+	/* Fade the fixed texture into the page background toward the bottom. */
+	fixed && (
+		<div
+			class="pointer-events-none fixed inset-0 -z-10"
+			style="background-image:linear-gradient(to bottom, transparent, var(--color-bg))"
+			aria-hidden="true"
+		/>
+	)
+} -->
