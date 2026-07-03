@@ -1,14 +1,14 @@
 ---
 const navItems = [
-	{ label: "Home", href: "/tmkznk.dev" },
+	{ label: "Home", href: "#" },
 	{ label: "About", href: "#about" },
 	{ label: "Work", href: "#work" },
 	{ label: "Contact", href: "#contact" },
 ];
 ---
 
-<header class="relative z-20">
-	<nav class="container-page flex items-center justify-between py-6" aria-label="Primary">
+<header id="site-header" class="fixed inset-x-0 top-0 z-20">
+	<nav class="container-page flex items-center justify-between py-3 md:py-6" aria-label="Primary">
 		<a
 			href="/"
 			class="text-xl font-bold tracking-tight"
@@ -61,36 +61,102 @@ const navItems = [
 	<!-- Mobile menu panel -->
 	<div
 		id="mobile-menu"
-		class="container-page hidden pb-4 md:hidden"
-		hidden
+		class="mobile-menu container-page z-30 md:hidden"
 	>
-		<ul class="flex flex-col gap-1 rounded-card border border-border bg-surface p-2">
-			{
-				navItems.map((item) => (
-					<li>
-						<a
-							href={item.href}
-							class="block rounded-xl px-4 py-3 text-body font-medium text-ink-secondary transition-colors hover:bg-surface-hover hover:text-ink"
-						>
-							{item.label}
-						</a>
-					</li>
-				))
-			}
-		</ul>
+		<div class="mobile-menu-inner">
+			<ul
+				class="mb-4 flex flex-col gap-1"
+			>
+				{
+					navItems.map((item) => (
+						<li>
+							<a
+								href={item.href}
+								class="block rounded-xl px-4 py-3 text-body font-medium text-ink-secondary transition-colors hover:bg-surface-hover hover:text-ink"
+							>
+								{item.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
 	</div>
 </header>
+
+<style>
+	/* Glass navbar once the page is scrolled away from the top. Same blur as
+	   the mobile menu; translucent bg is required for the blur to show. */
+	#site-header {
+		transition:
+			background-color 200ms ease,
+			backdrop-filter 200ms ease,
+			border-color 200ms ease;
+		border-bottom: 1px solid transparent;
+	}
+
+	#site-header.is-scrolled {
+		background-color: rgb(11 17 32 / 0.75); /* = bg-surface/75 */
+		border-bottom-color: var(--color-border);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+	}
+
+	/* Animated overlay panel: fades + slides in, hidden from tab order when
+	   closed (visibility toggles focusability). */
+	.mobile-menu {
+		display: grid;
+		grid-template-rows: 0fr;
+		visibility: hidden;
+		pointer-events: none;
+		transition:
+			grid-template-rows 300ms ease-in-out,
+			visibility 0s linear 300ms;
+	}
+
+	.mobile-menu.is-open {
+		grid-template-rows: 1fr;
+		visibility: visible;
+		pointer-events: auto;
+		transition: grid-template-rows 300ms ease-in-out;
+	}
+
+	/* Grid child that actually collapses — overflow clips the content while the
+	   0fr → 1fr track animates the height. */
+	.mobile-menu-inner {
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	/* Scoped `display: grid` above outweighs Tailwind's `md:hidden`, so hide
+	   the panel from the md breakpoint up explicitly. */
+	@media (min-width: 768px) {
+		.mobile-menu {
+			display: none;
+		}
+	}
+</style>
 
 <script>
 	const toggle = document.getElementById("menu-toggle");
 	const menu = document.getElementById("mobile-menu");
+	const header = document.getElementById("site-header");
+
+	// Glass navbar when scrolled away from the top OR while the mobile menu
+	// is open (so the panel reads against a solid bar even at the top).
+	const updateHeader = () => {
+		const active = window.scrollY > 4 || !!menu?.classList.contains("is-open");
+		header?.classList.toggle("is-scrolled", active);
+	};
+	updateHeader();
+	window.addEventListener("scroll", updateHeader, { passive: true });
 
 	function setOpen(open: boolean) {
 		if (!toggle || !menu) return;
 		toggle.setAttribute("aria-expanded", String(open));
 		toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-		menu.hidden = !open;
-		menu.classList.toggle("hidden", !open);
+		menu.classList.toggle("is-open", open);
+		updateHeader();
 	}
 
 	toggle?.addEventListener("click", () => {
@@ -105,4 +171,11 @@ const navItems = [
 	document.addEventListener("keydown", (e) => {
 		if (e.key === "Escape") setOpen(false);
 	});
+
+	// Reset the menu state when crossing into the desktop layout.
+	window
+		.matchMedia("(min-width: 768px)")
+		.addEventListener("change", (e) => {
+			if (e.matches) setOpen(false);
+		});
 </script>

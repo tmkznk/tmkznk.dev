@@ -125,7 +125,9 @@
    ============================================================================= */
 @layer base {
   html {
+    --header-h: 5.75rem; /* fixed header height — reserve space below it */
     scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h); /* anchors clear the fixed header */
   }
 
   body {
@@ -135,6 +137,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden; /* guard against decorative bleed causing h-scroll */
+    padding-top: var(--header-h); /* clear the fixed header */
   }
 
   ::selection {
@@ -225,9 +228,9 @@
       background-color 0.2s ease,
       border-color 0.2s ease;
   }
-  .btn:hover {
+  /* .btn:hover {
     transform: translateY(-2px);
-  }
+  } */
 
   .btn-primary {
     background-color: var(--color-accent);
