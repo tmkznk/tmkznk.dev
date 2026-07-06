@@ -10,6 +10,9 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import placeholder from "../assets/work/placeholder.png";
+import pagebuilder from "../assets/work/page-builder.png";
+import app from "../assets/work/diet-and-training-app.png";
+import kairos from "../assets/work/kairos-list.png";
 
 type Project = {
 	title: string;
@@ -21,9 +24,9 @@ type Project = {
 
 const projects: Project[] = [
 	{
-		title: "White-label Diet & Training App",
+		title: "Diet & Training App",
 		description:
-			"White-label nutrition and training platform for fitness influencers — including Anna Lewandowska. Built the nutrition, body-measurement (with progress charts), hydration, achievements and knowledge-base modules, plus an AI meal & workout tracker that logs entries via text, photo, voice or barcode — recognizing food and breaking it down into ingredients, macros and calories.",
+			"White-label nutrition and training platform for fitness influencers — including Anna Lewandowska, Noelle Benepe, Victoria Loza, Nicci Robinson and more. Built the nutrition, body-measurement (with progress charts), hydration, achievements and knowledge-base modules, plus an AI meal & workout tracker that logs entries via text, photo, voice or barcode — recognizing food and breaking it down into ingredients, macros and calories.",
 		tags: [
 			"React",
 			"TypeScript",
@@ -32,24 +35,24 @@ const projects: Project[] = [
 			"Bootstrap",
 			"Firebase",
 		],
-		image: placeholder,
+		image: app,
 		alt: "White-label diet and training app interface.",
 	},
 	{
-		title: "PageBuilder",
+		title: "Page Builder",
 		description:
 			"A block-based landing-page generator: 18 reusable sections, each with defined fields and five light/dark color themes. Pages are assembled like building blocks and populated in Strapi — copy, images and video. Extended with an AI generator that scaffolds full landing pages automatically.",
 		tags: ["Astro", "Strapi", "GraphQL", "Tailwind CSS"],
-		image: placeholder,
-		alt: "PageBuilder landing-page generator interface.",
+		image: pagebuilder,
+		alt: "Page Builder landing-page generator interface.",
 	},
 	{
-		title: "KairosList",
+		title: "Kairos List",
 		description:
 			'An AI-assisted bucket list. Enter a few dreams and the AI builds a psychological profile, then suggests goals that fit you. A "dream concierge" assistant helps you make them happen — from permits and gear to training and nutrition plans for, say, climbing Kilimanjaro.',
 		tags: ["Next.js", "OpenAI API", "Firebase", "Tailwind CSS", "Vercel"],
-		image: placeholder,
-		alt: "KairosList AI-assisted bucket list interface.",
+		image: kairos,
+		alt: "Kairos List AI-assisted bucket list interface.",
 	},
 ];
 ---
